@@ -1,0 +1,39 @@
+.table-container {
+    width: 100%;
+    overflow-x: auto; 
+    padding-top: 20px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table-header,
+  .table-data {
+    padding: 8px 12px; 
+    text-align: left; 
+    border: 2px solid rgb(147, 147, 147); 
+    border: 1px solid #767676; 
+  }
+  
+  .tablerow:nth-child(even) {
+    background-color: #777777; 
+  }
+  
+  .tablerow {
+    border: 1px solid #616161; 
+  }
+  
+  .tablerow:last-child {
+    border: 1px solid rgb(154, 154, 154); 
+  }
+  
+  .table-data {
+    border-right: 1px solid #616161; 
+  }
+  
+  .table-data:last-child,
+  .table-header:last-child {
+    border-right: none; 
+  }
