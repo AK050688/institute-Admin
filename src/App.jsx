@@ -6,6 +6,7 @@ import Dashboard from './Pages/Dashboard.jsx';
 import Student from './Pages/Student.jsx';
 import Teachers from './Pages/Teachers.jsx';
 import Registration from './Pages/Registration.jsx';
+import ProfileForm from './Components/ProfileForm.jsx';
 
 
 
@@ -15,14 +16,15 @@ function App() {
   return (
     <BrowserRouter>
       <Sidebar>
-        <Routes>
+        {/* <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/student" element={<Student />} />
           <Route path="/teacher" element={<Teachers/>} />
           <Route path="/registration" element={<Registration />} />
           
-        </Routes>
+        </Routes> */}
+        <ProfileForm/>
       </Sidebar>
     </BrowserRouter>
   )

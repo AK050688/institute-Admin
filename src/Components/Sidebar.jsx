@@ -35,7 +35,8 @@ const Sidebar = ({children}) => {
        
     ]
     return (
-        <div className="container">
+        <>   
+        <div className='flex'>
            <div style={{width: isOpen ? "230px" : "50px"}} className="sidebar">
                <div className="top_section">
                    <img src="https://yt3.googleusercontent.com/BD6jdwY4iosy_AvzawaKCceFVt-5otehbbOgLWIlL_EVpAf1iXadeNQEuMzUEokKNPQy8QKq5A=s900-c-k-c0x00ffffff-no-rj"  style={{display: isOpen ? "block" : "none"}} className="logo w-20 h-20 rounded-full" />
@@ -54,6 +55,7 @@ const Sidebar = ({children}) => {
            </div>
            <main>{children}</main>
         </div>
+        </>
     );
 };
 
