@@ -7,6 +7,9 @@ import Student from './Pages/Student.jsx';
 import Teachers from './Pages/Teachers.jsx';
 import Registration from './Pages/Registration.jsx';
 import ProfileForm from './Components/ProfileForm.jsx';
+import ChangePassword from './Components/ChangePassword.jsx';
+import Notification from './Pages/Notification.jsx';
+import Login from './utiles/Login.jsx';
 
 
 
@@ -16,15 +19,18 @@ function App() {
   return (
     <BrowserRouter>
       <Sidebar>
-        {/* <Routes>
+        <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/student" element={<Student />} />
           <Route path="/teacher" element={<Teachers/>} />
           <Route path="/registration" element={<Registration />} />
-          
-        </Routes> */}
-        <ProfileForm/>
+          <Route path="/dashboard/profile" element={<ProfileForm />} />
+          <Route path="/dashboard/profile/changepassword" element={<ChangePassword />} />
+          <Route path='/notifications' element={<Notification/>}/>
+        </Routes>
+        {/* <ProfileForm/> */}
+        {/* <Login/> */}
       </Sidebar>
     </BrowserRouter>
   )

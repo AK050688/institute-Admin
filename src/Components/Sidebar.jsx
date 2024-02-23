@@ -5,6 +5,8 @@ import {
     FaUserAlt,
     FaCommentAlt,
 }from "react-icons/fa";
+import { MdNotificationsActive } from "react-icons/md";
+
 import { NavLink } from 'react-router-dom';
 
 
@@ -32,6 +34,11 @@ const Sidebar = ({children}) => {
             name:"Registration",
             icon:<FaCommentAlt/>
         },
+        {
+            path: "/notifications",
+            name: "Notifications",
+            icon: <MdNotificationsActive />,
+        }
        
     ]
     return (

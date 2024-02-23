@@ -1,6 +1,7 @@
 import React from 'react'
 import { IoIosSearch } from "react-icons/io";
 import "./student.css"
+import Navbar from '../Components/Navbar';
 
 
  
@@ -13,10 +14,10 @@ import "./student.css"
 function Student() {
  
   return (
-  <div>
-    <div className='bg-black rounded w-full'>
-      <h1 className=' text-white p-6 w-full text-center font-extrabold'>Admin Dashboard</h1>
-    </div>
+  <div className=''>
+    <div className=" h-[60px] bg-black">
+       <Navbar/>
+      </div>
     <div className='grid m-3 grid-cols-1 relative border-b-[0.1px] border-gray-500 '>
      <div className='min-h-[90px] rounded bg-slate-100 shadow-lg'>
        <h1 className='text-black p-7 text-start m-4 font-bold'>Students List </h1>   

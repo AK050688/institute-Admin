@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { RiLockPasswordFill } from "react-icons/ri";
 import Navbar from "./Navbar";
+import { Link } from "react-router-dom";
 
 
 const RegisterForm = () => {
@@ -34,7 +35,7 @@ const RegisterForm = () => {
       </div>
         <div className="w-[80%] border bg-white rounded-lg shadow-lg mx-auto m-4 px-8 py-5 flex justify-between items-center">
             <div className="text-[20px] font-medium">Admin Profile</div>
-            <div className="flex gap-3 justify-center items-center bg-slate-600 p-4 rounded-md hover:bg-slate-500"><RiLockPasswordFill /><span>Change Password</span></div>
+            <Link to={"/dashboard/profile/changepassword"}><div className="flex gap-3 justify-center items-center bg-slate-600 p-4 rounded-md hover:bg-slate-500"><RiLockPasswordFill /><span>Change Password</span></div></Link>
         </div>
       
         <div className="w-[80%] mt-10 border border-8 border-slate-900	 mx-auto m-4 p-8 bg-white rounded-lg shadow-lg">
@@ -64,7 +65,7 @@ const RegisterForm = () => {
                     <label htmlFor="mobileNo" className="text-sm font-medium text-gray-700">Mobile Number</label>
                     <input type="tel" id="mobileNo" name="mobileNo" value={formData.mobileNo} onChange={handleChange} className="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full" required />
                 </div>
-                <button type="submit" className="bg-slate-600 text-white py-2 px-4 rounded-md hover:bg-slate-500 ml-auto">Save</button>
+                <button type="submit" className="bg-slate-600 text-black py-2 px-4 rounded-md hover:bg-slate-500 ml-auto">Save</button>
             </form>
         </div>
         </>
