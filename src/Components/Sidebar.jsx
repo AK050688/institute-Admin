@@ -6,6 +6,8 @@ import {
     FaCommentAlt,
 }from "react-icons/fa";
 import { MdNotificationsActive } from "react-icons/md";
+import { GrCertificate } from "react-icons/gr";
+
 
 import { NavLink } from 'react-router-dom';
 
@@ -38,6 +40,11 @@ const Sidebar = ({children}) => {
             path: "/notifications",
             name: "Notifications",
             icon: <MdNotificationsActive />,
+        },
+        {
+            path: "/courses",
+            name: "Courses",
+            icon: <GrCertificate />,
         }
        
     ]

@@ -32,7 +32,7 @@ const Navbar = () => {
     return (
         <nav className="text-white flex justify-between items-center p-4 mr-4 text-2xl font-bold">
             <div></div>
-            <div>Admin Dashboard</div>
+            <div className="tracking-wide">Admin Dashboard</div>
             <div ref={profileRef} onClick={toggleProfile} style={{ cursor: "pointer" }}>
                 <CgProfile />
             </div>

@@ -37,69 +37,74 @@ const TeacherForm = () => {
   return (
     <div className="max-w-2xl mx-auto p-8 border mt-6 rounded-md bg-[#40ecb5]">
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-          />
+        <div className="flex w-full gap-3">
+          <div className="w-1/2">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+            />
+          </div>
+          <div className="w-1/2">
+            <label
+              htmlFor="guardianName"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Guardian Name
+            </label>
+            <input
+              type="text"
+              id="guardianName"
+              name="guardianName"
+              value={formData.guardianName}
+              onChange={handleChange}
+              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+            />
+          </div>
         </div>
-        <div>
-          <label
-            htmlFor="guardianName"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Guardian Name
-          </label>
-          <input
-            type="text"
-            id="guardianName"
-            name="guardianName"
-            value={formData.guardianName}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Email
-          </label>
-          <input
-            type="mail"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="mobileNo"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Mobile No
-          </label>
-          <input
-            type="text"
-            id="mobileNo"
-            name="mobileNo"
-            value={formData.mobileNo}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-          />
+
+        <div className="flex w-full gap-3">
+          <div className="w-1/2">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
+            <input
+              type="mail"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+            />
+          </div>
+          <div className="w-1/2">
+            <label
+              htmlFor="mobileNo"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Mobile No
+            </label>
+            <input
+              type="text"
+              id="mobileNo"
+              name="mobileNo"
+              value={formData.mobileNo}
+              onChange={handleChange}
+              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+            />
+          </div>
         </div>
 
         <div className="flex w-full gap-3">
@@ -188,38 +193,38 @@ const TeacherForm = () => {
           />
         </div>
         <div className="flex w-full gap-3">
-        <div className="w-1/2">
-          <label
-            htmlFor="bloodGroup"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Blood Group
-          </label>
-          <input
-            type="text"
-            id="bloodGroup"
-            name="bloodGroup"
-            value={formData.bloodGroup}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-          />
-        </div>
-        <div  className="w-1/2">
-          <label
-            htmlFor="department"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Department
-          </label>
-          <input
-            type="text"
-            id="department"
-            name="department"
-            value={formData.department}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-          />
-        </div>
+          <div className="w-1/2">
+            <label
+              htmlFor="bloodGroup"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Blood Group
+            </label>
+            <input
+              type="text"
+              id="bloodGroup"
+              name="bloodGroup"
+              value={formData.bloodGroup}
+              onChange={handleChange}
+              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+            />
+          </div>
+          <div className="w-1/2">
+            <label
+              htmlFor="department"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Department
+            </label>
+            <input
+              type="text"
+              id="department"
+              name="department"
+              value={formData.department}
+              onChange={handleChange}
+              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+            />
+          </div>
         </div>
         <div>
           <label
@@ -229,7 +234,7 @@ const TeacherForm = () => {
             Joining Date
           </label>
           <input
-            type="text"
+            type="date"
             id="joiningDate"
             name="joiningDate"
             value={formData.joiningDate}

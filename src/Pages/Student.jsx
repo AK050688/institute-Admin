@@ -18,12 +18,13 @@ function Student() {
     <div className=" h-[60px] bg-black">
        <Navbar/>
       </div>
+
     <div className='grid m-3 grid-cols-1 relative border-b-[0.1px] border-gray-500 '>
-     <div className='min-h-[90px] rounded bg-slate-100 shadow-lg'>
-       <h1 className='text-black p-7 text-start m-4 font-bold'>Students List </h1>   
+     <div className='min-h-[90px] rounded bg-slate-100 shadow-lg px-4 flex justify-center items-center'>
+       <h1 className='text-2xl font-bold -tracking-4'>Students List </h1>   
      </div>
     </div>
-    <section className='flex justify-around'>
+    <section className='flex justify-around px-4'>
       <aside className='w-full'> <label htmlFor="">Rows per page</label>
         <select name="" id="" className='border-[2px] border-gray-500 p-2 w-40'>
           <option value="">10</option>
@@ -46,7 +47,7 @@ function Student() {
       </aside>
     </section>
     
-    <div class="table-container">
+    <div class="table-container px-4">
     <table class="table">
       <thead class='tablehead'>
         <tr class='tablerow'>

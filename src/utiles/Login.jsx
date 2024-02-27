@@ -2,26 +2,50 @@ import React, { useState } from 'react';
 import { FaUserCircle } from "react-icons/fa";
 import { IoLockOpenOutline } from 'react-icons/io5';
 // import { Link } from 'react-router-dom'
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from "axios"
+
+
+
 
 
 function Login() {
-  const [inputs, setInputs] = useState({});
   const [userData, setUserData] = useState('');
-  // const navigate = useNavigate();
+  const navigate = useNavigate()
+  // const [username,setUsername] = useState('');
+  const [email,setEmail] = useState('');
+  const [password,setPassword] = useState('');
+ 
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs((values) => ({ ...values, [name]: value }));
-  };
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   const data = {
+  //     username,password
+  //   }
+  //   console.log(data);
+  
+  //   try {
+   
+  //     const res = await axios.post('https://university-project-paresh.onrender.com/University/Admin/signIn', data)
+  //     console.log(res);
 
-  const {  userName, password,  } = inputs;
-  const handleSubmit =  (event) => {
-    event.preventDefault();
-    const data = ( { userName, password, });
-    setUserData(data.data);
-  };
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //     alert('An error occurred. Please try again later.');
+  //   }
+  // };
+  
+  const handleSubmit= async (e)=>{
+    e.preventDefault();
+    // console.log(username,password)
+    try{
+      const res= await axios.post('https://vast-pear-dalmatian-kit.cyclic.app/users/login',{email,password})
+      console.log(res);
+      localStorage.setItem('token',res.token);
+    }catch(err){
+      console.log(err);
+    }
+  }
 
   return (
     <div className='text-white h-[100vh] flex justify-center items-center bg-cover' style={{"backgroundImage": "url('../src/assets/bg.jpg.jpg"}}>
@@ -34,8 +58,9 @@ function Login() {
               type="text" 
               id="username"
               name="userName"
+              value={email}
               className='block w-72 py-2.3 px-0 text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-white focus:border-blue-600 peer'
-              onChange={handleChange}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <FaUserCircle className='absolute top-0 right-1'/>
           </div>
@@ -45,8 +70,9 @@ function Login() {
               type="password" 
               id="password"
               name="password"
+              value={password}
               className='block w-72 py-2.3 px-0 text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-white focus:border-blue-600 peer'
-              onChange={handleChange}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <IoLockOpenOutline className='absolute top-0 right-1'/>
           </div> 

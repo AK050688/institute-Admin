@@ -10,6 +10,8 @@ import ProfileForm from './Components/ProfileForm.jsx';
 import ChangePassword from './Components/ChangePassword.jsx';
 import Notification from './Pages/Notification.jsx';
 import Login from './utiles/Login.jsx';
+import PrivateRoute from './Components/PrivateRoute.jsx';
+import Courses from './Pages/Courses.jsx';
 
 
 
@@ -20,18 +22,23 @@ function App() {
     <BrowserRouter>
       <Sidebar>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/student" element={<Student />} />
+          {/* <Route path="/" element={<PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>} /> */}
+          <Route path="/" element={
+            <Dashboard />} />
+          <Route path="/student" element={<Student/>} />
           <Route path="/teacher" element={<Teachers/>} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/dashboard/profile" element={<ProfileForm />} />
           <Route path="/dashboard/profile/changepassword" element={<ChangePassword />} />
           <Route path='/notifications' element={<Notification/>}/>
+          <Route path='/courses' element={<Courses/>}/>
         </Routes>
-        {/* <ProfileForm/> */}
-        {/* <Login/> */}
       </Sidebar>
+        {/* <Login/> */}
     </BrowserRouter>
   )
 }

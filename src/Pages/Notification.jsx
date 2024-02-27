@@ -43,7 +43,7 @@ const Notification = () => {
                 </div>
                 <div className="flex flex-col w-1/2 pr-4 mb-4">
                     <label htmlFor="date" className="text-sm font-medium text-gray-700">Date</label>
-                    <input type="text" id="date" name="date" value={formData.date} onChange={handleChange} className="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full" />
+                    <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} className="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full" />
                 </div>
                 <div className="flex flex-col w-1/2 pl-4 mb-4">
                     <label htmlFor="discription" className="text-sm font-medium text-gray-700">Discription</label>
