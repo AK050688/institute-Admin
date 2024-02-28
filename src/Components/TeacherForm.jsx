@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 
 const TeacherForm = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    Name: "",
     guardianName: "",
     email: "",
     mobileNo: "",
@@ -14,50 +15,86 @@ const TeacherForm = () => {
     gender: "",
     bloodGroup: "",
     department: "",
-    joiningDate: "",
+    joiningDate: ""
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    handleChange(name, value);
+  };
+
+  const handleSelectChange = (selectedOption) => {
+    handleChange("gender", selectedOption.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(formData);
+    setLoading(true);
+
+    const token = localStorage.getItem("token");
+
+    fetch(
+      "https://university-project-paresh.onrender.com/University/Student/signUp",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(formData)
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.message) {
+          localStorage.setItem("TeacherToken", data.accessToken);
+          alert(`${data.message}`);
+          navigate("/teacher");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
+    { value: "female", label: "Female" },
+    { value: "male", label: "Male" },
+    { value: "other", label: "Others" }
   ];
 
   return (
-    <div className="max-w-2xl mx-auto p-8 border mt-6 rounded-md bg-[#40ecb5]">
+    <div className="max-w-2xl mx-auto mt-6 rounded-3xl text-white border border-slate-400 p-10 shadow-lg backdrop-filter backdrop-blur-xs bg-opacity-30 relative">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="flex w-full gap-3">
           <div className="w-1/2">
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="name" className="block text-sm font-medium">
               Name
             </label>
             <input
               type="text"
               id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              name="Name"
+              value={formData.Name}
+              onChange={handleInputChange}
+              className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
           <div className="w-1/2">
             <label
               htmlFor="guardianName"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium  "
             >
               Guardian Name
             </label>
@@ -66,18 +103,15 @@ const TeacherForm = () => {
               id="guardianName"
               name="guardianName"
               value={formData.guardianName}
-              onChange={handleChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              onChange={handleInputChange}
+              className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
         </div>
 
         <div className="flex w-full gap-3">
           <div className="w-1/2">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="email" className="block text-sm font-medium  ">
               Email
             </label>
             <input
@@ -85,15 +119,12 @@ const TeacherForm = () => {
               id="email"
               name="email"
               value={formData.email}
-              onChange={handleChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              onChange={handleInputChange}
+              className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
           <div className="w-1/2">
-            <label
-              htmlFor="mobileNo"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="mobileNo" className="block text-sm font-medium  ">
               Mobile No
             </label>
             <input
@@ -101,18 +132,15 @@ const TeacherForm = () => {
               id="mobileNo"
               name="mobileNo"
               value={formData.mobileNo}
-              onChange={handleChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              onChange={handleInputChange}
+              className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
         </div>
 
         <div className="flex w-full gap-3">
           <div className="w-1/2">
-            <label
-              htmlFor="address"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="address" className="block text-sm font-medium  ">
               Address
             </label>
             <input
@@ -120,15 +148,12 @@ const TeacherForm = () => {
               id="address"
               name="address"
               value={formData.address}
-              onChange={handleChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              onChange={handleInputChange}
+              className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
           <div className="w-1/2">
-            <label
-              htmlFor="pin"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="pin" className="block text-sm font-medium  ">
               Pin
             </label>
             <input
@@ -136,8 +161,8 @@ const TeacherForm = () => {
               id="pin"
               name="pin"
               value={formData.pin}
-              onChange={handleChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              onChange={handleInputChange}
+              className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
         </div>
@@ -146,7 +171,7 @@ const TeacherForm = () => {
           <div className="w-1/2">
             <label
               htmlFor="cityORVillage"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium  "
             >
               City OR Village
             </label>
@@ -155,15 +180,12 @@ const TeacherForm = () => {
               id="cityORVillage"
               name="cityORVillage"
               value={formData.cityORVillage}
-              onChange={handleChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              onChange={handleInputChange}
+              className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
           <div className="w-1/2">
-            <label
-              htmlFor="state"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="state" className="block text-sm font-medium  ">
               State
             </label>
             <input
@@ -171,33 +193,27 @@ const TeacherForm = () => {
               id="state"
               name="state"
               value={formData.state}
-              onChange={handleChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              onChange={handleInputChange}
+              className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
         </div>
 
         <div>
-          <label
-            htmlFor="gender"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="gender" className="block text-sm font-medium  ">
             Gender
           </label>
           <Select
-            value={formData.gender}
-            onChange={handleChange}
-            name="gender"
+            value={options.find((option) => option.value === formData.gender)}
+            onChange={handleSelectChange}
             options={options}
             className="mt-1 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 w-full rounded-md"
+            required
           />
         </div>
         <div className="flex w-full gap-3">
           <div className="w-1/2">
-            <label
-              htmlFor="bloodGroup"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="bloodGroup" className="block text-sm font-medium  ">
               Blood Group
             </label>
             <input
@@ -205,15 +221,12 @@ const TeacherForm = () => {
               id="bloodGroup"
               name="bloodGroup"
               value={formData.bloodGroup}
-              onChange={handleChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              onChange={handleInputChange}
+              className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
           <div className="w-1/2">
-            <label
-              htmlFor="department"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="department" className="block text-sm font-medium  ">
               Department
             </label>
             <input
@@ -221,16 +234,13 @@ const TeacherForm = () => {
               id="department"
               name="department"
               value={formData.department}
-              onChange={handleChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              onChange={handleInputChange}
+              className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
         </div>
         <div>
-          <label
-            htmlFor="joiningDate"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="joiningDate" className="block text-sm font-medium  ">
             Joining Date
           </label>
           <input
@@ -238,17 +248,23 @@ const TeacherForm = () => {
             id="joiningDate"
             name="joiningDate"
             value={formData.joiningDate}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+            onChange={handleInputChange}
+            className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
           />
         </div>
 
         <div>
           <button
             type="submit"
-            className="w-full bg-[#000] text-white p-3 rounded-md hover:bg-[#232222] transition duration-300"
+            className="w-full bg-blue-700 text-black p-3 rounded-md hover:bg-blue-300 transition duration-300"
           >
-            Submit
+            {loading ? (
+              <div className="spinner-border spinner-border-sm" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            ) : (
+              "Submit"
+            )}
           </button>
         </div>
       </form>

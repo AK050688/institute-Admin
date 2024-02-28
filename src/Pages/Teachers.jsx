@@ -1,115 +1,120 @@
-import React from 'react'
-import { IoIosSearch } from "react-icons/io";
-import Navbar from '../Components/Navbar';
-
+import { FaSearch } from "react-icons/fa";
+import Navbar from "../Components/Navbar";
+import { useEffect, useState } from "react";
 
 function Teachers() {
-  return (
-    <div>
-    <div className=" h-[60px] bg-black">
-       <Navbar/>
-      </div>
-    <div className='grid m-3 grid-cols-1 relative border-b-[0.1px] border-gray-500 '>
-     <div className='min-h-[90px] rounded bg-slate-100 shadow-lg px-4 flex justify-center items-center'>
-       <h1 className='text-2xl font-bold -tracking-4'>Teachers List </h1>   
-     </div>
-    </div>
-    <section className='flex justify-around px-4'>
-      <aside className='w-full'> <label htmlFor="">Rows per page</label>
-        <select name="" id="" className='border-[2px] border-gray-500 p-2 w-40'>
-          <option value="">10</option>
-          <option value="">20</option>
-          <option value="">30</option>
-          <option value="">40</option>
-          <option value="">50</option>
-          <option value="">60</option>
-          <option value="">70</option>
-          <option value="">80</option>
-          <option value="">90</option>
-          <option value="">100</option>
-        </select> </aside>
-      <aside className='w-full'> 
-      <div className='relative'>
-      <input type="search" name="" placeholder='search here' className='border-[2px] border-gray-300 p-2 w-45 pl-10 rounded' />
-      <IoIosSearch className='absolute top-3 left-2' />
-      </div>
+  const [teacher, setTeachers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-      </aside>
-    </section>
-    
-    <div class="table-container px-4">
-    <table class="table">
-      <thead class='tablehead'>
-        <tr class='tablerow'>
-          <th class='table-header'>ID</th>
-          <th class='table-header'>Teacher Name</th>
-          <th class='table-header'>Mobile</th>
-          <th class='table-header'>Email</th>
-          
-        </tr>
-      </thead>
-      <tbody class='tbody'>
-        <tr class='tablerow'>
-          <td class='table-data'>1</td>
-          <td class='table-data'>Shubham</td>
-          <td class='table-data'>6202214935</td>
-          <td class='table-data'>shubham@1234gmail.com</td>
-          
-        </tr>
-        <tr class='tablerow'>
-          <td class='table-data'>2</td>
-          <td class='table-data'>Shubham</td>
-          <td class='table-data'>6202214935</td>
-          <td class='table-data'>shubham@1234gmail.com</td>
-          
-        </tr>
-        <tr class='tablerow'>
-          <td class='table-data'>3</td>
-          <td class='table-data'>Shubham</td>
-          <td class='table-data'>6202214935</td>
-          <td class='table-data'>shubham@1234gmail.com</td>
-          
-        </tr>
-        <tr class='tablerow'>
-          <td class='table-data'>4</td>
-          <td class='table-data'>Shubham</td>
-          <td class='table-data'>6202214935</td>
-          <td class='table-data'>shubham@1234gmail.com</td>
-          
-        </tr>
-        <tr class='tablerow'>
-          <td class='table-data'>5</td>
-          <td class='table-data'>Shubham</td>
-          <td class='table-data'>6202214935</td>
-          <td class='table-data'>shubham@1234gmail.com</td>
-          
-        </tr>
-        <tr class='tablerow'>
-          <td class='table-data'>6</td>
-          <td class='table-data'>Shubham</td>
-          <td class='table-data'>6202214935</td>
-          <td class='table-data'>shubham@1234gmail.com</td>
-          
-        </tr>
-        <tr class='tablerow'>
-          <td class='table-data'>7</td>
-          <td class='table-data'>Shubham</td>
-          <td class='table-data'>6202214935</td>
-          <td class='table-data'>shubham@1234gmail.com</td>
-          
-        </tr>
-        <tr class='tablerow'>
-          <td class='table-data'>8</td>
-          <td class='table-data'>Shubham</td>
-          <td class='table-data'>6202214935</td>
-          <td class='table-data'>shubham@1234gmail.com</td>
-          
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    fetch(
+      "https://university-project-paresh.onrender.com/University/Admin/allTeachers",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("teacherData", data.Teachers);
+        setTeachers(data.Teachers);
+      })
+      .catch((error) => {
+        console.error("Error fetching student data:", error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+  return (
+    <div className="teacher-container">
+      <div className=" h-[60px] bg-black">
+        <Navbar />
+      </div>
+      <div className="student-heading">
+        <div className="min-h-[90px] rounded flex justify-center items-center">
+          <h1 className="text-3xl font-semibold text-blue-600">
+            All Teachers List
+          </h1>
+        </div>
+      </div>
+      <section className="flex flex-col md:flex-row justify-between items-center px-4 py-4 bg-gray-100">
+        <div className="flex items-center mb-4 md:mb-0">
+          <label htmlFor="rowsPerPage" className="text-gray-600">
+            Rows per page:
+          </label>
+          <select
+            name="rowsPerPage"
+            id="rowsPerPage"
+            className="border p-2 px-4 md:px-9 text-gray-800 rounded-md"
+          >
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+          </select>
+        </div>
+
+        <div className="flex items-center">
+          <div className="relative">
+            <input
+              type="search"
+              name="search"
+              placeholder="Search here"
+              className="border p-2 px-4 md:px-28 rounded-md focus:outline-none"
+            />
+            <div className="absolute top-3 right-2 text-gray-500">
+              <FaSearch />
+            </div>
+          </div>
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">
+            Search
+          </button>
+        </div>
+      </section>
+
+      {!loading && (
+        <div className="table-container">
+          <div className="table-section">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Guardian Name</th>
+                  <th>Email</th>
+                  <th>Mobile</th>
+                  <th>State</th>
+                  <th>Gender</th>
+                  <th>Blood Group</th>
+                  <th>Department</th>
+                  <th>Joining Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {teacher.map((student, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{student.Name}</td>
+                    <td>{student.guardian_Name}</td>
+                    <td>{student.email}</td>
+                    <td>{student.mobileNo}</td>
+                    <td>{student.state}</td>
+                    <td>{student.gender}</td>
+                    <td>{student.bloodGroup}</td>
+                    <td>{student.Department}</td>
+                    <td>{student.joiningDate}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-export default Teachers
+export default Teachers;

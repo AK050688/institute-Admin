@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Navbar from "./Navbar";
 import { RiAdminFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
-
-
 
 const ChangePassword = () => {
     const [formData, setFormData] = useState({
@@ -21,7 +19,6 @@ const ChangePassword = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // You can perform form validation or submit data to the server here
         console.log(formData);
     };
 
