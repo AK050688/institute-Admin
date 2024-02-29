@@ -77,25 +77,28 @@ const StudentForm = () => {
     { value: "other", label: "Others" }
   ];
   return (
-    <div className="max-w-2xl mx-auto mt-6 rounded-3xl text-white border border-slate-400 p-10 shadow-lg backdrop-filter backdrop-blur-xs bg-opacity-30 relative">
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium">
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="Name"
-            value={formData.Name}
-            onChange={handleInputChange}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
-            required
-          />
-        </div>
+    <div className="max-w-2xl mx-auto rounded-3xl text-white border border-slate-400 p-5 shadow-lg backdrop-filter backdrop-blur-xs bg-opacity-30 relative">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <h1 className="text-center text-blue-500 text-3xl">
+          Student Registration Form
+        </h1>
         <div className="flex w-full gap-3">
-          <div className="w-1/2">
-            <label htmlFor="fatherName" className="block text-sm font-medium  ">
+          <div className="w-1/3">
+            <label htmlFor="name" className="block text-sm font-medium">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="Name"
+              value={formData.Name}
+              onChange={handleInputChange}
+              className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
+              required
+            />
+          </div>
+          <div className="w-1/3">
+            <label htmlFor="fatherName" className="block text-sm font-medium">
               Father&apos;s Name
             </label>
             <input
@@ -108,8 +111,8 @@ const StudentForm = () => {
               required
             />
           </div>
-          <div className="w-1/2">
-            <label htmlFor="motherName" className="block text-sm font-medium  ">
+          <div className="w-1/3">
+            <label htmlFor="motherName" className="block text-sm font-medium">
               Mother&apos;s Name
             </label>
             <input
@@ -124,8 +127,8 @@ const StudentForm = () => {
           </div>
         </div>
         <div className="flex w-full gap-3">
-          <div className="w-1/2">
-            <label htmlFor="email" className="block text-sm font-medium  ">
+          <div className="w-1/3">
+            <label htmlFor="email" className="block text-sm font-medium">
               Email
             </label>
             <input
@@ -138,7 +141,7 @@ const StudentForm = () => {
               required
             />
           </div>
-          <div className="w-1/2">
+          <div className="w-1/3">
             <label htmlFor="mobileNo" className="block text-sm font-medium">
               Mobile No
             </label>
@@ -152,10 +155,7 @@ const StudentForm = () => {
               required
             />
           </div>
-        </div>
-
-        <div className="flex w-full gap-3">
-          <div className="w-1/2">
+          <div className="w-1/3">
             <label htmlFor="address" className="block text-sm font-medium">
               Address
             </label>
@@ -169,29 +169,14 @@ const StudentForm = () => {
               required
             />
           </div>
-          <div className="w-1/2">
-            <label htmlFor="pin" className="block text-sm font-medium">
-              Pin
-            </label>
-            <input
-              type="text"
-              id="pin"
-              name="pin"
-              value={formData.pin}
-              onChange={handleInputChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
-              required
-            />
-          </div>
         </div>
-
         <div className="flex w-full gap-3">
-          <div className="w-1/2">
+          <div className="w-1/3">
             <label
               htmlFor="cityORVillage"
               className="block text-sm font-medium"
             >
-              City OR Village
+              City/Village
             </label>
             <input
               type="text"
@@ -203,7 +188,7 @@ const StudentForm = () => {
               required
             />
           </div>
-          <div className="w-1/2">
+          <div className="w-1/3">
             <label htmlFor="state" className="block text-sm font-medium">
               State
             </label>
@@ -217,8 +202,8 @@ const StudentForm = () => {
               required
             />
           </div>
-          <div className="w-1/2">
-            <label htmlFor="state" className="block text-sm font-medium">
+          <div className="w-1/3">
+            <label htmlFor="country" className="block text-sm font-medium">
               Country
             </label>
             <input
@@ -232,21 +217,20 @@ const StudentForm = () => {
             />
           </div>
         </div>
-
-        <div>
-          <label htmlFor="gender" className="block text-sm font-medium">
-            Gender
-          </label>
-          <Select
-            value={options.find((option) => option.value === formData.gender)}
-            onChange={handleSelectChange}
-            options={options}
-            className="mt-1 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 w-full rounded-md text-black"
-            required
-          />
-        </div>
         <div className="flex w-full gap-3">
-          <div className="w-1/2">
+          <div className="w-1/3">
+            <label htmlFor="gender" className="block text-sm font-medium">
+              Gender
+            </label>
+            <Select
+              value={options.find((option) => option.value === formData.gender)}
+              onChange={handleSelectChange}
+              options={options}
+              className="mt-1 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 w-full rounded-md text-black"
+              required
+            />
+          </div>
+          <div className="w-1/3">
             <label htmlFor="bloodGroup" className="block text-sm font-medium">
               Blood Group
             </label>
@@ -256,11 +240,11 @@ const StudentForm = () => {
               name="bloodGroup"
               value={formData.bloodGroup}
               onChange={handleInputChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
               required
             />
           </div>
-          <div className="w-1/2">
+          <div className="w-1/3">
             <label htmlFor="rollNo" className="block text-sm font-medium">
               Roll No
             </label>
@@ -276,7 +260,7 @@ const StudentForm = () => {
           </div>
         </div>
         <div className="flex w-full gap-3">
-          <div className="w-1/2">
+          <div className="w-1/3">
             <label htmlFor="courseTaken" className="block text-sm font-medium">
               Course Taken
             </label>
@@ -290,7 +274,7 @@ const StudentForm = () => {
               required
             />
           </div>
-          <div className="w-1/2">
+          <div className="w-1/3">
             <label htmlFor="branchName" className="block text-sm font-medium">
               Branch Name
             </label>
@@ -304,26 +288,28 @@ const StudentForm = () => {
               required
             />
           </div>
+          <div className="w-1/3">
+            <label
+              htmlFor="admissionYear"
+              className="block text-sm font-medium"
+            >
+              Admission Year
+            </label>
+            <input
+              type="number"
+              id="admissionYear"
+              name="admissionYear"
+              value={formData.admissionYear}
+              onChange={handleInputChange}
+              className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
+              required
+            />
+          </div>
         </div>
-        <div>
-          <label htmlFor="admissionYear" className="block text-sm font-medium">
-            Admission Year
-          </label>
-          <input
-            type="number"
-            id="admissionYear"
-            name="admissionYear"
-            value={formData.admissionYear}
-            onChange={handleInputChange}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
-            required
-          />
-        </div>
-
         <div>
           <button
             type="submit"
-            className="w-full bg-blue-700 text-black p-3 rounded-md hover:bg-blue-300 transition duration-300"
+            className="w-[50%] mx-auto bg-blue-300 text-black p-3 rounded-md hover:bg-blue-700 transition duration-300 ml-40"
           >
             {loading ? (
               <div className="spinner-border spinner-border-sm" role="status">

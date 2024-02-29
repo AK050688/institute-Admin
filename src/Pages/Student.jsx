@@ -6,8 +6,13 @@ import Navbar from "../Components/Navbar";
 function Student() {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isDelete, setIsDelete] = useState(false);
 
   useEffect(() => {
+    handleGetData();
+  }, []);
+
+  const handleGetData = () => {
     const token = localStorage.getItem("token");
     fetch(
       "https://university-project-paresh.onrender.com/University/Admin/allStudents",
@@ -20,6 +25,7 @@ function Student() {
     )
       .then((response) => response.json())
       .then((data) => {
+        console.log("studentData", data.Students);
         setStudents(data.Students);
       })
       .catch((error) => {
@@ -28,7 +34,40 @@ function Student() {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  };
+
+  const deleteRow = (studentId) => {
+    const token = localStorage.getItem("token");
+    fetch(
+      `https://university-project-paresh.onrender.com/University/Course/deleteCourse/${studentId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Deleted student:", data);
+        setIsDelete(true);
+        setTimeout(() => setIsDelete(false), 1000);
+      })
+      .catch((error) => {
+        console.error("Error deleting student:", error);
+        setIsDelete(false);
+      })
+      .finally(() => {
+        setLoading(false);
+        setIsDelete(false);
+      });
+  };
+
+  const toggleTeacherStatus = (index) => {
+    const updatedStudent = [...students];
+    updatedStudent[index].status = !updatedStudent[index].status;
+    setStudents(updatedStudent);
+  };
 
   return (
     <div className="student-container">
@@ -78,7 +117,11 @@ function Student() {
         </div>
       </section>
 
-      {!loading && (
+      {loading ? (
+        <div className="spinner-border spinner-border-sm" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      ) : (
         <div className="table-container">
           <div className="table-section">
             <table>
@@ -93,10 +136,12 @@ function Student() {
                   <th>Course Taken</th>
                   <th>Branch Name</th>
                   <th>Admission Year</th>
+                  <th>Enable/Disable</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
-                {students.map((student, index) => (
+                {students?.map((student, index) => (
                   <tr key={index}>
                     <td>{student.rollNo}</td>
                     <td>{student.Name}</td>
@@ -107,6 +152,28 @@ function Student() {
                     <td>{student.courseTaken}</td>
                     <td>{student.branchName}</td>
                     <td>{student.admissionYear}</td>
+                    <td>
+                      <button
+                        onClick={() => toggleTeacherStatus(index)}
+                        className={`bg-transparent border rounded-md px-3 py-1 ${
+                          student.status
+                            ? "border-green-500 bg-green-500 text-white"
+                            : "border-red-500 bg-red-500 text-white"
+                        }`}
+                      >
+                        {student.status ? "Enable" : "Disable"}
+                      </button>
+                    </td>
+                    {!isDelete && (
+                      <td>
+                        <botton
+                          className="bg-red-500 text-white px-3 py-1 rounded-md cursor-pointer"
+                          onClick={() => deleteRow(student._id)}
+                        >
+                          Delete
+                        </botton>
+                      </td>
+                    )}
                   </tr>
                 ))}
               </tbody>

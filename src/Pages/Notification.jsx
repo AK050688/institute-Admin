@@ -18,7 +18,6 @@ const Notification = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can perform form validation or submit data to the server here
     console.log(formData);
   };
 
@@ -32,13 +31,12 @@ const Notification = () => {
         style={{ backgroundImage: "url('../src/assets/bg.jpg" }}
       >
         <div className="w-[80%] max-w-2xl mx-auto rounded-3xl text-white border border-slate-400 p-10 shadow-lg backdrop-filter backdrop-blur-xs bg-opacity-30">
-          <h2 className="text-2xl font-bold mb-4 text-center text-blue-300">Notification</h2>
+          <h2 className="text-2xl font-bold mb-4 text-center text-blue-300">
+            Notification
+          </h2>
           <form onSubmit={handleSubmit} className="flex flex-wrap">
             <div className="flex flex-col w-1/2 pr-4 mb-4">
-              <label
-                htmlFor="title"
-                className="text-sm font-medium"
-              >
+              <label htmlFor="title" className="text-sm font-medium">
                 Title
               </label>
               <input
@@ -52,10 +50,7 @@ const Notification = () => {
               />
             </div>
             <div className="flex flex-col w-1/2 pl-4 mb-4">
-              <label
-                htmlFor="subject"
-                className="text-sm font-medium "
-              >
+              <label htmlFor="subject" className="text-sm font-medium ">
                 Subject
               </label>
               <input
@@ -69,10 +64,7 @@ const Notification = () => {
               />
             </div>
             <div className="flex flex-col w-1/2 pr-4 mb-4">
-              <label
-                htmlFor="date"
-                className="text-sm font-medium "
-              >
+              <label htmlFor="date" className="text-sm font-medium ">
                 Date
               </label>
               <input
@@ -85,10 +77,7 @@ const Notification = () => {
               />
             </div>
             <div className="flex flex-col w-1/2 pl-4 mb-4">
-              <label
-                htmlFor="discription"
-                className="text-sm font-medium "
-              >
+              <label htmlFor="discription" className="text-sm font-medium ">
                 Discription
               </label>
               <textarea

@@ -9,6 +9,7 @@ import ProfileForm from "../Components/ProfileForm";
 import Notification from "../Pages/Notification";
 import Courses from "../Pages/Courses";
 import ChangePassword from "../Components/ChangePassword";
+import Exam from "../Pages/Exam";
 
 const AllRoutes = () => {
   return (
@@ -76,6 +77,14 @@ const AllRoutes = () => {
           element={
             <Sidebar>
               <Courses />
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/exam"
+          element={
+            <Sidebar>
+              <Exam />
             </Sidebar>
           }
         />

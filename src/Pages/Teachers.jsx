@@ -3,10 +3,14 @@ import Navbar from "../Components/Navbar";
 import { useEffect, useState } from "react";
 
 function Teachers() {
-  const [teacher, setTeachers] = useState([]);
+  const [teachers, setTeachers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    handleGetTeacher();
+  }, []);
+
+  const handleGetTeacher = () => {
     const token = localStorage.getItem("token");
     fetch(
       "https://university-project-paresh.onrender.com/University/Admin/allTeachers",
@@ -28,10 +32,21 @@ function Teachers() {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  };
+
+  const toggleTeacherStatus = (index) => {
+    const updatedTeachers = [...teachers];
+    updatedTeachers[index].status = !updatedTeachers[index].status;
+    setTeachers(updatedTeachers);
+  };
+
+  const deleteRow = (rollNo) => {
+    setTeachers(teachers.filter((teacher) => teacher.rollNo !== rollNo));
+  };
+
   return (
     <div className="teacher-container">
-      <div className=" h-[60px] bg-black">
+      <div className="h-[60px] bg-black">
         <Navbar />
       </div>
       <div className="student-heading">
@@ -75,7 +90,11 @@ function Teachers() {
         </div>
       </section>
 
-      {!loading && (
+      {loading ? (
+        <div className="spinner-border spinner-border-sm" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      ) : (
         <div className="table-container">
           <div className="table-section">
             <table>
@@ -91,21 +110,43 @@ function Teachers() {
                   <th>Blood Group</th>
                   <th>Department</th>
                   <th>Joining Date</th>
+                  <th>Enable/Disable</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
-                {teacher.map((student, index) => (
+                {teachers?.map((teacher, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{student.Name}</td>
-                    <td>{student.guardian_Name}</td>
-                    <td>{student.email}</td>
-                    <td>{student.mobileNo}</td>
-                    <td>{student.state}</td>
-                    <td>{student.gender}</td>
-                    <td>{student.bloodGroup}</td>
-                    <td>{student.Department}</td>
-                    <td>{student.joiningDate}</td>
+                    <td>{teacher.Name}</td>
+                    <td>{teacher.guardian_Name}</td>
+                    <td>{teacher.email}</td>
+                    <td>{teacher.mobileNo}</td>
+                    <td>{teacher.state}</td>
+                    <td>{teacher.gender}</td>
+                    <td>{teacher.bloodGroup}</td>
+                    <td>{teacher.Department}</td>
+                    <td>{teacher.joiningDate}</td>
+                    <td>
+                      <button
+                        onClick={() => toggleTeacherStatus(index)}
+                        className={`bg-transparent border rounded-md px-3 py-1 ${
+                          teacher.status
+                            ? "border-green-500 bg-green-500 text-white"
+                            : "border-red-500 bg-red-500 text-white"
+                        }`}
+                      >
+                        {teacher.status ? "Enable" : "Disable"}
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => deleteRow(teacher.index)}
+                        className="bg-red-500 text-white px-3 py-1 rounded-md ml-2"
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

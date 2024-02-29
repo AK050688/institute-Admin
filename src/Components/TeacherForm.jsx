@@ -75,10 +75,13 @@ const TeacherForm = () => {
   ];
 
   return (
-    <div className="max-w-2xl mx-auto mt-6 rounded-3xl text-white border border-slate-400 p-10 shadow-lg backdrop-filter backdrop-blur-xs bg-opacity-30 relative">
+    <div className="max-w-2xl mx-auto mt-6 rounded-3xl text-white border border-slate-400 p-[2%] shadow-lg backdrop-filter backdrop-blur-xs bg-opacity-30 relative">
       <form onSubmit={handleSubmit} className="space-y-6">
+        <h1 className="text-center text-blue-500 text-3xl">
+          Student Registration Form
+        </h1>
         <div className="flex w-full gap-3">
-          <div className="w-1/2">
+          <div className="w-1/3">
             <label htmlFor="name" className="block text-sm font-medium">
               Name
             </label>
@@ -91,11 +94,8 @@ const TeacherForm = () => {
               className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
-          <div className="w-1/2">
-            <label
-              htmlFor="guardianName"
-              className="block text-sm font-medium  "
-            >
+          <div className="w-1/3">
+            <label htmlFor="guardianName" className="block text-sm font-medium">
               Guardian Name
             </label>
             <input
@@ -107,11 +107,8 @@ const TeacherForm = () => {
               className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
-        </div>
-
-        <div className="flex w-full gap-3">
-          <div className="w-1/2">
-            <label htmlFor="email" className="block text-sm font-medium  ">
+          <div className="w-1/3">
+            <label htmlFor="email" className="block text-sm font-medium">
               Email
             </label>
             <input
@@ -123,8 +120,10 @@ const TeacherForm = () => {
               className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
-          <div className="w-1/2">
-            <label htmlFor="mobileNo" className="block text-sm font-medium  ">
+        </div>
+        <div className="flex w-full gap-3">
+          <div className="w-1/3">
+            <label htmlFor="mobileNo" className="block text-sm font-medium">
               Mobile No
             </label>
             <input
@@ -136,11 +135,8 @@ const TeacherForm = () => {
               className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
-        </div>
-
-        <div className="flex w-full gap-3">
-          <div className="w-1/2">
-            <label htmlFor="address" className="block text-sm font-medium  ">
+          <div className="w-1/3">
+            <label htmlFor="address" className="block text-sm font-medium">
               Address
             </label>
             <input
@@ -152,8 +148,8 @@ const TeacherForm = () => {
               className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
-          <div className="w-1/2">
-            <label htmlFor="pin" className="block text-sm font-medium  ">
+          <div className="w-1/3">
+            <label htmlFor="pin" className="block text-sm font-medium">
               Pin
             </label>
             <input
@@ -166,12 +162,11 @@ const TeacherForm = () => {
             />
           </div>
         </div>
-
         <div className="flex w-full gap-3">
-          <div className="w-1/2">
+          <div className="w-1/3">
             <label
               htmlFor="cityORVillage"
-              className="block text-sm font-medium  "
+              className="block text-sm font-medium"
             >
               City OR Village
             </label>
@@ -184,8 +179,8 @@ const TeacherForm = () => {
               className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
-          <div className="w-1/2">
-            <label htmlFor="state" className="block text-sm font-medium  ">
+          <div className="w-1/3">
+            <label htmlFor="state" className="block text-sm font-medium">
               State
             </label>
             <input
@@ -197,23 +192,22 @@ const TeacherForm = () => {
               className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
-        </div>
-
-        <div>
-          <label htmlFor="gender" className="block text-sm font-medium  ">
-            Gender
-          </label>
-          <Select
-            value={options.find((option) => option.value === formData.gender)}
-            onChange={handleSelectChange}
-            options={options}
-            className="mt-1 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 w-full rounded-md"
-            required
-          />
+          <div className="w-1/3">
+            <label htmlFor="gender" className="block text-sm font-medium">
+              Gender
+            </label>
+            <Select
+              value={options.find((option) => option.value === formData.gender)}
+              onChange={handleSelectChange}
+              options={options}
+              className="mt-1 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 w-full rounded-md text-black"
+              required
+            />
+          </div>
         </div>
         <div className="flex w-full gap-3">
-          <div className="w-1/2">
-            <label htmlFor="bloodGroup" className="block text-sm font-medium  ">
+          <div className="w-1/3">
+            <label htmlFor="bloodGroup" className="block text-sm font-medium">
               Blood Group
             </label>
             <input
@@ -225,8 +219,8 @@ const TeacherForm = () => {
               className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
-          <div className="w-1/2">
-            <label htmlFor="department" className="block text-sm font-medium  ">
+          <div className="w-1/3">
+            <label htmlFor="department" className="block text-sm font-medium">
               Department
             </label>
             <input
@@ -238,25 +232,24 @@ const TeacherForm = () => {
               className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
           </div>
+          <div className="w-1/3">
+            <label htmlFor="joiningDate" className="block text-sm font-medium">
+              Joining Date
+            </label>
+            <input
+              type="date"
+              id="joiningDate"
+              name="joiningDate"
+              value={formData.joiningDate}
+              onChange={handleInputChange}
+              className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
+            />
+          </div>
         </div>
-        <div>
-          <label htmlFor="joiningDate" className="block text-sm font-medium  ">
-            Joining Date
-          </label>
-          <input
-            type="date"
-            id="joiningDate"
-            name="joiningDate"
-            value={formData.joiningDate}
-            onChange={handleInputChange}
-            className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
-          />
-        </div>
-
         <div>
           <button
             type="submit"
-            className="w-full bg-blue-700 text-black p-3 rounded-md hover:bg-blue-300 transition duration-300"
+            className="w-[50%] mx-auto ml-40 bg-blue-300 text-black p-3 rounded-md hover:bg-blue-700 transition duration-300"
           >
             {loading ? (
               <div className="spinner-border spinner-border-sm" role="status">

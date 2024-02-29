@@ -5,6 +5,7 @@ import { MdNotificationsActive } from "react-icons/md";
 import { GrCertificate } from "react-icons/gr";
 import "./Sidebar.css";
 import { NavLink } from "react-router-dom";
+import { PiExamFill } from "react-icons/pi";
 
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,6 +40,11 @@ const Sidebar = ({ children }) => {
       path: "/courses",
       name: "Courses",
       icon: <GrCertificate />
+    },
+    {
+      path: "/exam",
+      name: "Exam",
+      icon: <PiExamFill />
     }
   ];
   return (
