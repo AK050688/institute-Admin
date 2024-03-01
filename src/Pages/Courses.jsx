@@ -15,6 +15,7 @@ const Courses = () => {
 
   useEffect(() => {
     handleGetData();
+    // deleteRow();
   }, []);
 
   const handleGetData = () => {
@@ -65,14 +66,13 @@ const Courses = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log("Deleted course:", data);
-        toast.success(data.message);
+        alert(`${data.message}`);
         setIsDelete(true);
         setTimeout(() => setIsDelete(false), 1000);
       })
       .catch((error) => {
         console.error("Error deleting course:", error);
         toast.error("Failed to delete course. Please try again later.");
-        setIsDelete(false);
       })
       .finally(() => {
         setLoading(false);
@@ -92,8 +92,11 @@ const Courses = () => {
       </div>
       <ToastContainer />
 
-      <div className="mx-auto">
-        <div className="w-full flex justify-between items-center p-4 bg-white">
+      <div
+        className="mx-auto bg-cover h-[90vh]"
+        style={{ backgroundImage: "url('../src/assets/bg.jpg" }}
+      >
+        <div className="w-full flex justify-between items-center p-4">
           <div></div>
           {/* <h1 className="text-lg font-bold mb-2 mx-auto">Course Page</h1> */}
           <button
@@ -163,7 +166,16 @@ const Courses = () => {
                           Edit
                         </button>
                       </td>
-                      {!isDelete && (
+                      {isDelete ? (
+                        <td>
+                          <botton
+                            className="bg-red-500 text-white px-3 py-1 rounded-md cursor-pointer"
+                            onClick={() => deleteRow(course._id)}
+                          >
+                            Delete
+                          </botton>
+                        </td>
+                      ) : (
                         <td>
                           <botton
                             className="bg-red-500 text-white px-3 py-1 rounded-md cursor-pointer"

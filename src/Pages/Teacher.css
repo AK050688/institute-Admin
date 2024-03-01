@@ -9,6 +9,8 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
+  color: white;
+  font-weight: 700;
 }
 
 thead th {
@@ -16,13 +18,12 @@ thead th {
   color: white;
   padding: 12px;
   text-align: left;
-  font-weight: bold;
-  text-align: center;
+  font-weight:bolder;
 }
 
-tbody tr:nth-child(even) {
-  background-color: #c7ddf6;
-}
+/* tbody tr:nth-child(even) {
+  background-color: #77b4f9;
+} */
 
 tbody tr:hover {
   background-color: #97c1f1;
@@ -44,6 +45,6 @@ td {
 }
 
 tbody tr:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(243, 240, 240, 0.905);
   transition: box-shadow 0.3s ease;
 }

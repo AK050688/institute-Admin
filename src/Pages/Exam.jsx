@@ -1,45 +1,79 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar.jsx";
-import { FiX } from "react-icons/fi";
+import ExamFormModel from "../Components/ExamFormModel.jsx";
+import ExamEditModel from "../Components/ExamEditModel.jsx";
 
 const Exam = () => {
   const [exams, setExams] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [examBranch, setExamBranch] = useState("");
-  const [examYear, setExamYear] = useState("");
-  const [examType, setExamType] = useState("");
-  const [examSubject, setExamSubject] = useState("");
-  const [examTiming, setExamTiming] = useState("");
-  const [examMarks, setExamMarks] = useState("");
-  const [examDate, setExamDate] = useState("");
-  const [examQuestionPaper, setExamQuestionPaper] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [editExamData, setEditExamData] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newExam = {
-      branch: examBranch,
-      year: examYear,
-      type: examType,
-      subject: examSubject,
-      timing: examTiming,
-      marks: examMarks,
-      date: examDate,
-      questionPaper: examQuestionPaper
-    };
-    setExams([...exams, newExam]);
-    setExamBranch("");
-    setExamYear("");
-    setExamType("");
-    setExamSubject("");
-    setExamTiming("");
-    setExamMarks("");
-    setExamDate("");
-    setExamQuestionPaper(null);
-    setShowForm(false);
+  useEffect(() => {
+    handleGetData();
+  }, []);
+
+  const handleGetData = () => {
+    fetch(
+      "https://university-project-paresh.onrender.com/University/ExamRoute/exams",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("examData", data);
+        setExams(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching student data:", error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const handleCloseForm = () => {
-    setShowForm(false);
+  const handleEditExam = (examId, updatedExamData) => {
+    setExams(
+      exams.map((exam) => {
+        if (exam._id === examId) {
+          return { ...exam, ...updatedExamData };
+        }
+        return exam;
+      })
+    );
+  };
+
+  const deleteRow = (examId) => {
+    fetch(
+      `https://university-project-paresh.onrender.com/University/ExamRoute/exams/${examId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Deleted exam:", data);
+        alert(`${data.message}`);
+      })
+      .catch((error) => {
+        console.error("Error deleting exam:", error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const addExam = (newExam) => {
+    console.log("new", newExam);
+    setExams([...exams, newExam.examDetails]);
   };
 
   return (
@@ -48,205 +82,103 @@ const Exam = () => {
         <Navbar />
       </div>
 
-      <div className=" mx-auto p-4">
-        <div className="border w-full flex justify-between p-5 bg-white rounded-lg shadow-md">
-          <h1 className="text-3xl font-bold mb-4">Exam Page</h1>
+      <div
+        className="mx-auto bg-cover h-[90vh]"
+        style={{ backgroundImage: "url('../src/assets/bg.jpg" }}
+      >
+        <div className="w-full flex justify-between items-center p-4">
+          <div></div>
+          {/* <h1 className="text-lg font-bold mb-2 mx-auto">Course Page</h1> */}
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-[15%] mt-0"
             onClick={() => setShowForm(true)}
           >
             Add Exam
           </button>
         </div>
+
         {showForm && (
-          <div className="fixed  inset-0 flex items-center justify-center bg-black rounded-2xl p-10  backdrop-filter backdrop-blur-xs bg-opacity-30">
-            <div className=" p-4 rounded w-[600px] border-white border-2 shadow-2xl bg-black">
-              <div className="flex justify-end">
-                <button
-                  className="hover:text-gray-500 text-2xl text-white"
-                  onClick={handleCloseForm}
-                >
-                  <FiX />
-                </button>
-              </div>
-              <h2 className="text-2xl font-bold mb-2 text-center p-2 mt-0 text-blue-600">
-                Add Exam
-              </h2>
-              <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 ">
-                <div className="mb-2">
-                  <label
-                    htmlFor="exam-branch"
-                    className="block text-white font-bold "
-                  >
-                    Exam Branch:
-                  </label>
-                  <input
-                    type="text"
-                    id="exam-branch"
-                    value={examBranch}
-                    onChange={(e) => setExamBranch(e.target.value)}
-                    className="border border-gray-400 rounded px-3 py-2 w-full"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="exam-year"
-                    className="block text-white font-bold"
-                  >
-                    Exam Year:
-                  </label>
-                  <input
-                    type="text"
-                    id="exam-year"
-                    value={examYear}
-                    onChange={(e) => setExamYear(e.target.value)}
-                    className="border border-gray-400 rounded px-3 py-2 w-full"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="exam-type"
-                    className="block text-white font-bold"
-                  >
-                    Exam Type:
-                  </label>
-                  <input
-                    type="text"
-                    id="exam-type"
-                    value={examType}
-                    onChange={(e) => setExamType(e.target.value)}
-                    className="border border-gray-400 rounded px-3 py-2 w-full"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="exam-subject"
-                    className="block text-white font-bold"
-                  >
-                    Exam Subject:
-                  </label>
-                  <input
-                    type="text"
-                    id="exam-subject"
-                    value={examSubject}
-                    onChange={(e) => setExamSubject(e.target.value)}
-                    className="border border-gray-400 rounded px-3 py-2 w-full"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="exam-timing"
-                    className="block text-white font-bold"
-                  >
-                    Exam Timing:
-                  </label>
-                  <input
-                    type="text"
-                    id="exam-timing"
-                    value={examTiming}
-                    onChange={(e) => setExamTiming(e.target.value)}
-                    className="border border-gray-400 rounded px-3 py-2 w-full"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="exam-marks"
-                    className="block text-white font-bold"
-                  >
-                    Exam Marks:
-                  </label>
-                  <input
-                    type="text"
-                    id="exam-marks"
-                    value={examMarks}
-                    onChange={(e) => setExamMarks(e.target.value)}
-                    className="border border-gray-400 rounded px-3 py-2 w-full"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="exam-date"
-                    className="block text-white font-bold"
-                  >
-                    Exam Date:
-                  </label>
-                  <input
-                    type="date"
-                    id="exam-date"
-                    value={examDate}
-                    onChange={(e) => setExamDate(e.target.value)}
-                    className="border-2 border-gray-400 rounded px-3 py-2 w-[560px]"
-                  />
-                </div>
-                <div className="col-span-2">
-                  <label
-                    htmlFor="exam-question-paper"
-                    className="block text-white font-bold mb-2 "
-                  >
-                    Exam Question Paper (PDF):
-                  </label>
-                  <input
-                    type="file"
-                    id="exam-question-paper"
-                    accept=".pdf"
-                    onChange={(e) => setExamQuestionPaper(e.target.files[0])}
-                    className="border border-gray-400 rounded px-3 py-2 w-full"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-span-2"
-                >
-                  Save
-                </button>
-              </form>
+          <ExamFormModel onAddExam={addExam} setShowForm={setShowForm} />
+        )}
+
+        {showEditForm && (
+          <ExamEditModel
+            examId={editExamData._id}
+            initialExamData={editExamData}
+            onEditExam={(examId, updatedExamData) =>
+              handleEditExam(examId, updatedExamData)
+            }
+            setShowEditForm={setShowEditForm}
+          />
+        )}
+
+        <div className="student-heading">
+          <div className="min-h-[90px] rounded flex justify-center items-center">
+            <h1 className="text-3xl font-semibold text-blue-600">
+              All Exam Lists
+            </h1>
+          </div>
+        </div>
+
+        {loading ? (
+          <div className="spinner-border spinner-border-sm" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : (
+          <div className="table-container">
+            <div className="table-section">
+              <table>
+                <thead>
+                  <tr>
+                    <th>S.No</th>
+                    <th>Exam Branch</th>
+                    <th>Exam Type</th>
+                    <th>Subject</th>
+                    <th>Year</th>
+                    <th>Timing</th>
+                    <th>Marks</th>
+                    <th>Date</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {exams?.map((exam, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{exam.examBranch}</td>
+                      <td>{exam.examType}</td>
+                      <td>{exam.examSubject}</td>
+                      <td>{exam.examYear}</td>
+                      <td>{exam.examTiming}</td>
+                      <td>{exam.examMarks}</td>
+                      <td>{exam.examDate}</td>
+                      <td>
+                        <button
+                          className="bg-green-500 text-white px-3 py-1 rounded-md"
+                          onClick={() => {
+                            setEditExamData(exam);
+                            setShowEditForm(true);
+                          }}
+                        >
+                          Edit
+                        </button>
+                      </td>
+                      <td>
+                        <botton
+                          className="bg-red-500 text-white px-3 py-1 rounded-md cursor-pointer"
+                          onClick={() => deleteRow(exam._id)}
+                        >
+                          Delete
+                        </botton>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         )}
-        <div className="mt-4">
-          {exams.map((exam, index) => (
-            <div
-              key={index}
-              className="bg-gray-100 p-4 mb-4 rounded shadow flex justify-between text-center"
-            >
-              <div>
-                <span className="font-bold">{exam.branch}</span>
-                <br />
-                <span>Exam Branch</span>
-              </div>
-              <div>
-                <span className="font-bold">{exam.year}</span>
-                <br />
-                <span>Exam Year</span>
-              </div>
-              <div>
-                <span className="font-bold">{exam.type}</span>
-                <br />
-                <span>Exam Type</span>
-              </div>
-              <div>
-                <span className="font-bold">{exam.subject}</span>
-                <br />
-                <span>Exam Subject</span>
-              </div>
-              <div>
-                <span className="font-bold">{exam.timing}</span>
-                <br />
-                <span>Exam Timing</span>
-              </div>
-              <div>
-                <span className="font-bold">{exam.marks}</span>
-                <br />
-                <span>Exam Marks</span>
-              </div>
-              <div>
-                <span className="font-bold">{exam.date}</span>
-                <br />
-                <span>Exam Date</span>
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );

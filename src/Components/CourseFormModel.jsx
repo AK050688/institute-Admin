@@ -3,6 +3,7 @@ import { FiX } from "react-icons/fi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 const CourseFormModel = ({ onAddCourse, setShowForm }) => {
   const [formData, setFormData] = useState({
     courseName: "",
@@ -50,11 +51,11 @@ const CourseFormModel = ({ onAddCourse, setShowForm }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black border border-slate-400 rounded-md p-10 shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-30 text-white">
+    <div className="fixed inset-0 flex items-center justify-center bg-slate-500 border border-slate-300 rounded-md p-10 shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-30 text-white">
       <ToastContainer />
-      <div className="p-6 rounded shadow-lg w-[600px] bg-black">
+      <div className="p-6 rounded shadow-lg w-[490px] bg-black">
         <div className="flex justify-between">
-          <div className="flex items-center ml-52">
+          <div className="flex items-center ml-36">
             <h2 className="text-2xl font-bold mx-auto">Add Course</h2>
           </div>
           <div className="flex items-center">
@@ -68,37 +69,39 @@ const CourseFormModel = ({ onAddCourse, setShowForm }) => {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label
-              htmlFor="course-name"
-              className="block font-bold mb-2 text-left"
-            >
-              Course Name:
-            </label>
-            <input
-              type="text"
-              id="course-name"
-              name="courseName"
-              value={formData.courseName}
-              onChange={handleChange}
-              className="border border-gray-400 rounded px-3 py-2 w-full bg-white text-black"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="courseFee"
-              className="block font-bold mb-2 text-left"
-            >
-              Course Fee:
-            </label>
-            <input
-              type="number"
-              id="course-fee"
-              name="courseFees"
-              value={formData.courseFees}
-              onChange={handleChange}
-              className="border border-gray-400 rounded px-3 py-2 w-full text-black"
-            />
+          <div className="flex gap-8">
+            <div className="mb-4 mt-4">
+              <label
+                htmlFor="course-name"
+                className="block font-bold mb-2 text-left"
+              >
+                Course Name:
+              </label>
+              <input
+                type="text"
+                id="course-name"
+                name="courseName"
+                value={formData.courseName}
+                onChange={handleChange}
+                className="border border-gray-400 rounded px-3 py-2 w-full bg-white text-black"
+              />
+            </div>
+            <div className="mb-4 mt-4">
+              <label
+                htmlFor="courseFee"
+                className="block font-bold mb-2 text-left"
+              >
+                Course Fee:
+              </label>
+              <input
+                type="number"
+                id="course-fee"
+                name="courseFees"
+                value={formData.courseFees}
+                onChange={handleChange}
+                className="border border-gray-400 rounded px-3 py-2 w-full text-black"
+              />
+            </div>
           </div>
           <div className="mb-4">
             <label
@@ -118,7 +121,7 @@ const CourseFormModel = ({ onAddCourse, setShowForm }) => {
           </div>
           <button
             type="submit"
-            className="w-[50%] mx-auto bg-blue-300 text-black p-3 rounded-md hover:bg-blue-700 transition duration-300 ml-40"
+            className="w-[50%] mx-auto bg-blue-300 text-black p-3 rounded-md hover:bg-blue-700 transition duration-300 ml-28"
           >
             {loading ? (
               <div className="spinner-border spinner-border-sm" role="status">

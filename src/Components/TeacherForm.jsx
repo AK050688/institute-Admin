@@ -5,7 +5,7 @@ import Select from "react-select";
 const TeacherForm = () => {
   const [formData, setFormData] = useState({
     Name: "",
-    guardianName: "",
+    guardian_Name: "",
     email: "",
     mobileNo: "",
     address: "",
@@ -14,7 +14,7 @@ const TeacherForm = () => {
     pin: "",
     gender: "",
     bloodGroup: "",
-    department: "",
+    Department: "",
     joiningDate: ""
   });
 
@@ -41,7 +41,7 @@ const TeacherForm = () => {
     const token = localStorage.getItem("token");
 
     fetch(
-      "https://university-project-paresh.onrender.com/University/Student/signUp",
+      "https://university-project-paresh.onrender.com/University/Teacher/signUp",
       {
         method: "POST",
         headers: {
@@ -53,7 +53,7 @@ const TeacherForm = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log("TeacherRegistration",data.TeacherDetails);
         if (data.message) {
           localStorage.setItem("TeacherToken", data.accessToken);
           alert(`${data.message}`);
@@ -78,7 +78,7 @@ const TeacherForm = () => {
     <div className="max-w-2xl mx-auto mt-6 rounded-3xl text-white border border-slate-400 p-[2%] shadow-lg backdrop-filter backdrop-blur-xs bg-opacity-30 relative">
       <form onSubmit={handleSubmit} className="space-y-6">
         <h1 className="text-center text-blue-500 text-3xl">
-          Student Registration Form
+          Teacher Registration Form
         </h1>
         <div className="flex w-full gap-3">
           <div className="w-1/3">
@@ -101,8 +101,8 @@ const TeacherForm = () => {
             <input
               type="text"
               id="guardianName"
-              name="guardianName"
-              value={formData.guardianName}
+              name="guardian_Name"
+              value={formData.guardian_Name}
               onChange={handleInputChange}
               className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
@@ -226,8 +226,8 @@ const TeacherForm = () => {
             <input
               type="text"
               id="department"
-              name="department"
-              value={formData.department}
+              name="Department"
+              value={formData.Department}
               onChange={handleInputChange}
               className="mt-1 p-2 w-full border border-gray-300  text-black rounded-md"
             />
