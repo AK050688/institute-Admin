@@ -170,12 +170,12 @@ function Teachers() {
                     </td> */}
                       {!isDelete && (
                         <td>
-                          <botton
+                          <button
                             className="bg-red-500 text-white px-3 py-1 rounded-md cursor-pointer"
                             onClick={() => deleteRow(teacher._id)}
                           >
                             Delete
-                          </botton>
+                          </button>
                         </td>
                       )}
                     </tr>

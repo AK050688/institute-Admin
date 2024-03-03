@@ -2,7 +2,6 @@ import { useState } from "react";
 import Navbar from "./Navbar";
 import { RiAdminFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
-// import "../assets"
 
 const ChangePassword = () => {
   const [formData, setFormData] = useState({

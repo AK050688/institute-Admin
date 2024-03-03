@@ -165,12 +165,12 @@ const Exam = () => {
                         </button>
                       </td>
                       <td>
-                        <botton
+                        <button
                           className="bg-red-500 text-white px-3 py-1 rounded-md cursor-pointer"
                           onClick={() => deleteRow(exam._id)}
                         >
                           Delete
-                        </botton>
+                        </button>
                       </td>
                     </tr>
                   ))}
